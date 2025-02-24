@@ -3,7 +3,7 @@ import { DataSource, DataSourceOptions } from 'typeorm';
 import * as dotenv from 'dotenv';
 dotenv.config();
 
-export const dbConfig: TypeOrmModuleOptions = {
+const dbConfig: TypeOrmModuleOptions & DataSourceOptions = {
   type: 'postgres',
   host: process.env.DB_HOST,
   // @ts-expect-error ignore
@@ -11,11 +11,12 @@ export const dbConfig: TypeOrmModuleOptions = {
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
-  //    autoLoadEntities: true,
+  autoLoadEntities: true,
   synchronize: false, // Setting synchronize: true shouldn't be used in production - otherwise you can lose production data.
   entities: ['dist/**/*.entity{.ts,.js}'],
   migrations: ['dist/src/migrations/*{.ts,.js}'],
 };
 
-const datasource = new DataSource(dbConfig as DataSourceOptions);
-export default datasource;
+const AppDataSource = new DataSource(dbConfig);
+
+export { dbConfig, AppDataSource };
