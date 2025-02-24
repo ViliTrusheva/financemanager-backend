@@ -6,6 +6,7 @@ dotenv.config();
 export const dbConfig: TypeOrmModuleOptions = {
   type: 'postgres',
   host: process.env.DB_HOST,
+  // @ts-expect-error ignore
   port: +process.env.DB_PORT,
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
