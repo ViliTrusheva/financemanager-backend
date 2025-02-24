@@ -4,6 +4,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { CategoriesModule } from './categories/categories.module';
+import { EntriesModule } from './entries/entries.module';
+import dbConfig from '../data.source';
 
 @Module({
   imports: [
@@ -23,6 +25,7 @@ import { CategoriesModule } from './categories/categories.module';
       inject: [ConfigService],
     }),
     CategoriesModule,
+    EntriesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
